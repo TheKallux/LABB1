@@ -1,14 +1,29 @@
-﻿string input = "29535123p48723487597645723645";
-int firstLetter = input[0];
+﻿
+string input = "29535123p48723487597645723645";
 
-for (int i = 1; i < input.Length; i++)
+for (int i = 0; i < input.Length; i++)
 {
-    if (i == input[0])
+    char currentChar = input[i]; // Char för nuvarande iteration av loopen.
+
+    if (char.IsDigit(currentChar)) // Om char är en siffra:
     {
-        break;
+        int firstIndex = i; // Så variabeln firstIndex = i
+        int lastIndex = input.IndexOf(currentChar, i + 1); // Så börjar variabeln lastIndex leta från i + 1.
+
+        if (lastIndex != -1) // Om lastIndex hittar en dublett av firstIndex så händer detta:
+        {
+            string inputSubstring = input.Substring(0, lastIndex); // Gör en substring från index 0 till lastIndex.
+            Console.WriteLine(inputSubstring); // Skriv ut denna substring.
+        }
+
+        if (lastIndex == -1 || char.IsLetter(currentChar))
+        {
+            continue;
+        }
     }
-    Console.ForegroundColor = ConsoleColor.Red;
-    Console.Write(input[i]);
+    
+    
 }
+
 
 Console.ReadLine();
